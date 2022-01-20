@@ -32,14 +32,10 @@ public class ApplicationService {
         throw new NotFoundException("ApplicationService.findByIdNumAndBirthDate - given information doesn't match with identification number:" + userDto.getIdentificationNumber());
     }
 
-    public ApplicationDto checkUserExistsAndSaveApplication(UserDto userDto) {
-        UserDto registeredUser = userService.findUserByIdentificationNumber(userDto.getIdentificationNumber());
-        if(!registeredUser.equals(userDto)) {
-            throw new NotFoundException("ApplicationService.checkUserExistsAndSaveApplication given information doesn't match with identification number: " + userDto.getIdentificationNumber());
-        }
-        CreditDto creditInfo = creditService.getCreditResultByUser(userDto);
+    public ApplicationDto checkUserExistsAndSaveApplication(String identificationNumber) {
+        UserDto user = userService.findUserByIdentificationNumber(identificationNumber);
+        CreditDto creditInfo = creditService.getCreditResultByUser(user);
         ApplicationDto applicationDto = ApplicationDto.builder()
-                .userDto(registeredUser)
                 .creditResult(creditInfo.getCreditResult())
                 .applicationDate(LocalDate.now())
                 .creditLimit(creditInfo.getCreditLimit())

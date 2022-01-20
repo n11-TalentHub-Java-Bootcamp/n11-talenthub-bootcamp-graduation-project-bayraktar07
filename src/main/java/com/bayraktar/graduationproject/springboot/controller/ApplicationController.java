@@ -1,7 +1,6 @@
 package com.bayraktar.graduationproject.springboot.controller;
 
 import com.bayraktar.graduationproject.springboot.dto.ApplicationDto;
-import com.bayraktar.graduationproject.springboot.dto.UserDto;
 import com.bayraktar.graduationproject.springboot.service.ApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +25,8 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<ApplicationDto> saveNewApplicationAndInformUserWithSMS(@RequestBody UserDto userDto) {
-        ApplicationDto applicationDto = applicationService.checkUserExistsAndSaveApplication(userDto);
+    public ResponseEntity<ApplicationDto> saveNewApplication(@RequestParam String identificationNumber) {
+        ApplicationDto applicationDto = applicationService.checkUserExistsAndSaveApplication(identificationNumber);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

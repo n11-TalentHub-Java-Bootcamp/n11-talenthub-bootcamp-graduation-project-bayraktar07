@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> saveNewUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> saveNewUser(@RequestBody @Valid UserDto userDto) {
         userDto = userService.saveUser(userDto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDto> updateExistingUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateExistingUser(@RequestBody @Valid UserDto userDto) {
         userDto = userService.updateUser(userDto);
         return ResponseEntity.ok(userDto);
     }

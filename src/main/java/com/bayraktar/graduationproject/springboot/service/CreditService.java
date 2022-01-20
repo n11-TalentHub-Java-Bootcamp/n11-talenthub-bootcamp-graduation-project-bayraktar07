@@ -37,15 +37,28 @@ public class CreditService {
         if(deposit == null) {
             deposit = new BigDecimal(0);
         }
-        if(creditScore >= 1000) {
-            returnValue = (monthlyIncome.intValue() * creditLimitMultiplier) + deposit.divide(new BigDecimal(2), RoundingMode.DOWN).intValue();
-        }else if(monthlyIncome.intValue() >= 10000) {
-            returnValue = (monthlyIncome.intValue() * creditLimitMultiplier / 2) + deposit.divide(new BigDecimal(4), RoundingMode.DOWN).intValue();
-        }else if(monthlyIncome.intValue() > 5000) {
-            returnValue = deposit.divide(new BigDecimal(5), RoundingMode.DOWN).intValue() + 20000;
-        }else {
-            returnValue = deposit.divide(new BigDecimal(10), RoundingMode.DOWN).intValue() + 10000;
+
+        switch (creditScore/500) {
+            case 0:
+                returnValue = 0;
+                break;
+            case 1:
+                if(monthlyIncome.intValue() >= 10000) {
+                    returnValue = (monthlyIncome.intValue() * creditLimitMultiplier / 2) + deposit.divide(new BigDecimal(4), RoundingMode.DOWN).intValue();
+                    break;
+                }else if(monthlyIncome.intValue() > 5000) {
+                    returnValue = deposit.divide(new BigDecimal(5), RoundingMode.DOWN).intValue() + 20000;
+                    break;
+                }
+                returnValue = deposit.divide(new BigDecimal(10), RoundingMode.DOWN).intValue() + 10000;
+                break;
+            case 2:
+                returnValue = (monthlyIncome.intValue() * creditLimitMultiplier) + deposit.divide(new BigDecimal(2), RoundingMode.DOWN).intValue();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected credit score: " + creditScore);
         }
+
         return new BigDecimal(returnValue);
     }
 }
