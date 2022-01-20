@@ -19,10 +19,12 @@ public class User implements BaseEntity {
     @Id
     private Long id;
 
+    @Column(unique = true)
     private String identificationNumber;
     private String name;
     private String surname;
     private BigDecimal monthlyIncome;
+    @Column(unique = true)
     private String phoneNumber;
     private LocalDate birthDate;
     private BigDecimal deposit;

@@ -2,6 +2,7 @@ package com.bayraktar.graduationproject.springboot.service;
 
 import com.bayraktar.graduationproject.springboot.dto.CreditDto;
 import com.bayraktar.graduationproject.springboot.dto.UserDto;
+import com.bayraktar.graduationproject.springboot.enums.CreditLimitMultiplier;
 import com.bayraktar.graduationproject.springboot.enums.CreditResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,6 @@ import java.math.RoundingMode;
 @Service
 @RequiredArgsConstructor
 public class CreditService {
-
-    private static final int creditLimitMultiplier = 4;
 
     public CreditDto getCreditResultByUser(UserDto userDto){
     CreditResult creditResult = calculateCreditResult(userDto.getCreditScore());
@@ -34,6 +33,7 @@ public class CreditService {
 
     private BigDecimal calculateCreditLimit(Integer creditScore, BigDecimal monthlyIncome, BigDecimal deposit) {
         int returnValue;
+        int creditLimitMultiplier = CreditLimitMultiplier.MULTIPLIER.getValue();
         if(deposit == null) {
             deposit = new BigDecimal(0);
         }

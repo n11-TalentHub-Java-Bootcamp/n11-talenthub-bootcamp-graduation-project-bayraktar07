@@ -5,8 +5,6 @@ import com.bayraktar.graduationproject.springboot.entity.Application;
 import com.bayraktar.graduationproject.springboot.service.entityservice.baseentityservice.BaseEntityService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-
 @Service
 public class ApplicationEntityService extends BaseEntityService<Application, ApplicationDao> {
 
@@ -14,7 +12,11 @@ public class ApplicationEntityService extends BaseEntityService<Application, App
         super(dao);
     }
 
-    public Application findApplicationByIdentificationNumberAndBirthDate(String identificationNumber, LocalDate birthDate){
-        return getDao().findApplicationByIdentificationNumberAndBirthDate(identificationNumber, birthDate);
+    public Application save(Application application) {
+        return getDao().save(application);
+    }
+
+    public Application findByUserId(Long userId) {
+        return getDao().findByUserId(userId);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/v1/applications")
@@ -20,13 +21,13 @@ public class ApplicationController {
 
     @GetMapping("/identification-numbers/{identificationNumber}")
     public ResponseEntity<ApplicationDto> getApplicationByIdentificationNumberAndBirthDate(@PathVariable String identificationNumber, String birthDate) {
-        ApplicationDto applicationDto = applicationService.findApplicationByIdentificationNumberAndBirthDate(identificationNumber, LocalDate.parse(birthDate));
+        ApplicationDto applicationDto = applicationService.findByIdNumAndBirthDate(identificationNumber, LocalDate.parse(birthDate, DateTimeFormatter.ISO_DATE));
         return ResponseEntity.ok(applicationDto);
     }
 
     @PostMapping
-    public ResponseEntity<ApplicationDto> saveNewApplication(@RequestBody UserDto userDto) {
-        ApplicationDto applicationDto = applicationService.saveApplication(userDto);
+    public ResponseEntity<ApplicationDto> saveNewApplicationAndInformUserWithSMS(@RequestBody UserDto userDto) {
+        ApplicationDto applicationDto = applicationService.checkUserExistsAndSaveApplication(userDto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

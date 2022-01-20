@@ -20,7 +20,13 @@ public class UserEntityService extends BaseEntityService<User, UserDao> {
     }
 
     public User findUserById(Long id){
-        return getDao().findById(id).orElseThrow(() -> new NotFoundException("UserEntityService.findUserById method returned null. User with id:" + id + " not found."));
+        return getDao().findById(id)
+                .orElseThrow(() -> new NotFoundException("UserEntityService.findUserById method returned null. User with id:" + id + " not found."));
+    }
+
+    public User findUserByIdentificationNumber(String id) {
+        return getDao().findByIdentificationNumber(id)
+                .orElseThrow(() -> new NotFoundException("UserEntityService.findUserByIdentificationNumber method returned null. User with id:" + id + " not found."));
     }
 
     public User saveUser(User user){

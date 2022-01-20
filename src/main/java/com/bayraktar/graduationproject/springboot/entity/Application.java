@@ -2,7 +2,6 @@ package com.bayraktar.graduationproject.springboot.entity;
 
 import com.bayraktar.graduationproject.springboot.entity.baseentity.BaseEntity;
 import com.bayraktar.graduationproject.springboot.enums.CreditResult;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +20,8 @@ public class Application implements BaseEntity {
     @Id
     private Long id;
 
-    @ManyToOne( fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_application"))
     private User user;
 
     private CreditResult creditResult;
