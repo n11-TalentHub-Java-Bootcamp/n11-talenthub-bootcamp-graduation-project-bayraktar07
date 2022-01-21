@@ -14,6 +14,6 @@ public class CreditDto {
 
     private CreditResult creditResult;
     private BigDecimal creditLimit;
-    private UserDto userDto;
+    private UserCreditDto userCreditDto;
 
 }

@@ -1,5 +1,6 @@
 package com.bayraktar.graduationproject.springboot.mapper;
 
+import com.bayraktar.graduationproject.springboot.dto.UserCreditDto;
 import com.bayraktar.graduationproject.springboot.dto.UserDto;
 import com.bayraktar.graduationproject.springboot.entity.User;
 import org.mapstruct.Mapper;
@@ -17,4 +18,12 @@ public interface UserMapper {
     UserDto userToUserDto(User user);
 
     List<UserDto> userListToUserDtoList(List<User> allUsers);
+
+    User userCreditDtoToUser(UserDto userCreditDto);
+
+    UserCreditDto userToUserCreditDto(User user);
+
+    UserDto userCreditDtoToUserDto(UserCreditDto userCreditDto);
+
+    UserCreditDto userDtoToUserCreditDto(UserDto userDto);
 }

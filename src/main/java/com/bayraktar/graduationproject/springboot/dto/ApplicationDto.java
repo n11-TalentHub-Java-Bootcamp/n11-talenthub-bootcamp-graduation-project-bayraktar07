@@ -19,4 +19,27 @@ public class ApplicationDto implements Serializable {
     @Pattern(regexp = "^(\\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
     private final LocalDate applicationDate;
     private final BigDecimal creditLimit;
+    private final Long userId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ApplicationDto that = (ApplicationDto) o;
+
+        if (creditResult != that.creditResult) return false;
+        if (!applicationDate.isEqual(that.applicationDate)) return false;
+        if (creditLimit.equals(that.creditLimit)) return false;
+        return userId.equals(that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = creditResult != null ? creditResult.hashCode() : 0;
+        result = 31 * result + (applicationDate != null ? applicationDate.hashCode() : 0);
+        result = 31 * result + (creditLimit != null ? creditLimit.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        return result;
+    }
 }

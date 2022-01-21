@@ -1,5 +1,6 @@
 package com.bayraktar.graduationproject.springboot.controller;
 
+import com.bayraktar.graduationproject.springboot.dto.UserCreditDto;
 import com.bayraktar.graduationproject.springboot.dto.UserDto;
 import com.bayraktar.graduationproject.springboot.exception.NotFoundException;
 import com.bayraktar.graduationproject.springboot.service.UserService;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserCreditDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.findUserById(id));
     }
 
@@ -42,8 +43,8 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<UserDto> updateExistingUser(@RequestBody @Valid UserDto userDto) {
-        userDto = userService.updateUser(userDto);
-        return ResponseEntity.ok(userDto);
+            userDto = userService.updateUser(userDto);
+            return ResponseEntity.ok(userDto);
     }
 
     @DeleteMapping

@@ -29,6 +29,10 @@ public class UserEntityService extends BaseEntityService<User, UserDao> {
                 .orElseThrow(() -> new NotFoundException("UserEntityService.findUserByIdentificationNumber method returned null. User with id:" + id + " not found."));
     }
 
+    public Integer findCreditScoreById(Long id) {
+        return findUserById(id).getCreditScore();
+    }
+
     public User saveUser(User user){
         return getDao().save(user);
     }

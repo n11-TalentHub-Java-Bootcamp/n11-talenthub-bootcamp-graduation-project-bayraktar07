@@ -4,8 +4,10 @@ import com.bayraktar.graduationproject.springboot.entity.Application;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ApplicationDao extends JpaRepository<Application, Long> {
 
-    Application findByUserId(Long id);
+    Optional<Application> findByUserId(Long id);
 }

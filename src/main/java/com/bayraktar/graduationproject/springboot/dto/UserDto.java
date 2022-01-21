@@ -2,6 +2,7 @@ package com.bayraktar.graduationproject.springboot.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -19,8 +20,7 @@ public class UserDto implements Serializable {
     private final BigDecimal monthlyIncome;
     @Pattern(regexp = "\\d{10}" ,message = "Incorrect entry. Correct format: 3336662244.")
     private final String phoneNumber;
+    @Past
     private final LocalDate birthDate;
     private final BigDecimal deposit;
-    private Integer creditScore;
-
 }

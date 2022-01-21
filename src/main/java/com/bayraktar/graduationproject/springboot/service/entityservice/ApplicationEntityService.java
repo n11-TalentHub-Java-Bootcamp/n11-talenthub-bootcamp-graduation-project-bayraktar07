@@ -5,6 +5,8 @@ import com.bayraktar.graduationproject.springboot.entity.Application;
 import com.bayraktar.graduationproject.springboot.service.entityservice.baseentityservice.BaseEntityService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ApplicationEntityService extends BaseEntityService<Application, ApplicationDao> {
 
@@ -16,7 +18,7 @@ public class ApplicationEntityService extends BaseEntityService<Application, App
         return getDao().save(application);
     }
 
-    public Application findByUserId(Long userId) {
+    public Optional<Application> findByUserId(Long userId) {
         return getDao().findByUserId(userId);
     }
 }
