@@ -37,5 +37,9 @@ Documentation openapi.yml file is in,
 > \n11-talenthub-bootcamp-graduation-project-bayraktar07\src\main\resources\documentation
 
 #### Project Requirements
-* Maven: https://maven.apache.org
-* Docker: https://www.docker.com/products/docker-desktop
+
+* [Maven] - Software project management and comprehension tool
+* [Docker] - Open source containerization platform
+
+[Docker]: <https://www.docker.com/products/docker-desktop>
+[Maven]: <https://maven.apache.org>
