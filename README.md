@@ -2,29 +2,39 @@
 
 #### App initialize
 
-Open a terminal and go to project`s location;
+* Open a terminal and go to project`s location;
 
-for Windows: `cd {ProjectLocation}\n11-talenthub-bootcamp-graduation-project-bayraktar07`
+ **for Windows:** 
+```sh
+cd {ProjectLocation}\n11-talenthub-bootcamp-graduation-project-bayraktar07
+```
 
-for Linux `cd {ProjectLocation}/n11-talenthub-bootcamp-graduation-project-bayraktar07`
+ **for Linux:**  
+```sh
+cd {ProjectLocation}/n11-talenthub-bootcamp-graduation-project-bayraktar07
+```
 
-example location: C:\Users\TUGRUL\IdeaProjects\n11-talenthub-bootcamp-graduation-project-bayraktar07
+**Example Location:** C:\Users\TUGRUL\IdeaProjects\n11-talenthub-bootcamp-graduation-project-bayraktar07
 
-To package the project; 
+* To package the project; 
 
-`mvn package -DskipTests=true`
+```sh
+mvn package -DskipTests=true
+```
 
-I skipped tests because its database setup is for docker container and tests fails when it tries to connect to the database.
+> I skipped tests because its database setup is for docker container and tests fails when it tries to connect to the database.
 
-To run the project on Docker;
+* To run the project on Docker;
 
-`docker-compose up`
+```sh
+docker-compose up
+```
 
-Access to Swagger UI from http://localhost:8080/swagger-ui.html
+* Access to Swagger UI from http://localhost:8080/swagger-ui.html
 
-API Documentation openapi.yml file is in,
+Documentation openapi.yml file is in,
 
-\n11-talenthub-bootcamp-graduation-project-bayraktar07\src\main\resources\documentation
+> \n11-talenthub-bootcamp-graduation-project-bayraktar07\src\main\resources\documentation
 
 #### Project Requirements
 * Maven: https://maven.apache.org
