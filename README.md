@@ -16,7 +16,7 @@ To package the project;
 
 I skipped tests because its database setup is for docker container and tests fails when it tries to connect to the database.
 
-To Dockerize the project;
+To run the project on Docker;
 
 `docker-compose up`
 
@@ -26,6 +26,6 @@ API Documentation openapi.yml file is in,
 
 \n11-talenthub-bootcamp-graduation-project-bayraktar07\src\main\resources\documentation
 
-####Project Requirements
+#### Project Requirements
 * Maven: https://maven.apache.org
 * Docker: https://www.docker.com/products/docker-desktop
