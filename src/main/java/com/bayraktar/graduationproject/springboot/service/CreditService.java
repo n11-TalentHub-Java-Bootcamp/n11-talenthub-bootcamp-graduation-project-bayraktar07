@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -39,8 +38,7 @@ public class CreditService {
     }
 
     private int calculateAndSaveCreditScoreByUserIdentificationNumber(User user) {
-        Random r = new Random();
-        user.setCreditScore(r.nextInt());
+        user.setCreditScore(user.getMonthlyIncome().divide(BigDecimal.valueOf(10),RoundingMode.DOWN).intValue());   //Assumpted Credit Score - Monthly Income divided by 10.
         userEntityService.updateUser(user);
         return  user.getCreditScore();
     }

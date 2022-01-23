@@ -20,7 +20,7 @@ public class Application implements BaseEntity {
     @Id
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_application"))
     private User user;
 

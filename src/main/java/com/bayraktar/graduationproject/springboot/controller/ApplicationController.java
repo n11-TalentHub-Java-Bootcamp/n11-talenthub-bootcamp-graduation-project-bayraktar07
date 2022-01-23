@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 @RestController
 @RequestMapping("/api/v1/applications")
 @AllArgsConstructor
+@CrossOrigin
 public class ApplicationController {
 
     private final ApplicationService applicationService;
@@ -26,7 +27,7 @@ public class ApplicationController {
 
     @PostMapping
     public ResponseEntity<ApplicationDto> saveNewApplication(@RequestParam String identificationNumber) {
-        ApplicationDto applicationDto = applicationService.checkUserExistsAndSaveApplication(identificationNumber);
+        ApplicationDto applicationDto = applicationService.checkUserAndApplicationExistsAndSaveApplication(identificationNumber);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

@@ -22,7 +22,6 @@ public class ApplicationService {
     private final ApplicationEntityService applicationEntityService;
     private final CreditService creditService;
     private final UserService userService;
-    //TODO: SMS Service and methods
 
     public ApplicationDto findByIdNumAndBirthDate(String identificationNumber, LocalDate birthDate) {
         UserDto userDto = userService.findUserByIdentificationNumber(identificationNumber);
@@ -34,27 +33,33 @@ public class ApplicationService {
         throw new NotFoundException("ApplicationService.findByIdNumAndBirthDate - given information doesn't match with identification number:" + userDto.getIdentificationNumber());
     }
 
-    public ApplicationDto checkUserExistsAndSaveApplication(String identificationNumber) {
+    public ApplicationDto checkUserAndApplicationExistsAndSaveApplication(String identificationNumber) {
         UserDto user = userService.findUserByIdentificationNumber(identificationNumber);
         CreditDto creditInfo = creditService.getCreditResultByUser(user.getId());
-        ApplicationDto applicationDto = ApplicationDto.builder()
+        ApplicationDto applicationDto = getApplicationDto(user, creditInfo);
+        applicationDto = doesUserHaveApplication(user.getId(), applicationDto);
+        Application application = applicationEntityService.save(ApplicationMapper.INSTANCE.applicationDtoToApplication(applicationDto));
+        return ApplicationMapper.INSTANCE.applicationToApplicationDto(application);
+    }
+
+    private ApplicationDto getApplicationDto(UserDto user, CreditDto creditInfo) {
+        return ApplicationDto.builder()
                 .creditResult(creditInfo.getCreditResult())
                 .applicationDate(LocalDate.now())
                 .creditLimit(creditInfo.getCreditLimit())
                 .userId(user.getId())
                 .build();
-        doesUserHaveApplication(user.getId(), applicationDto);
-        Application application = applicationEntityService.save(ApplicationMapper.INSTANCE.applicationDtoToApplication(applicationDto));
-        return ApplicationMapper.INSTANCE.applicationToApplicationDto(application);
     }
 
-    private void doesUserHaveApplication(Long id, ApplicationDto applicationDto) {
 
+    private ApplicationDto doesUserHaveApplication(Long id, ApplicationDto applicationDto) {
         applicationEntityService.findByUserId(id).ifPresent((application) -> {
             ApplicationDto previousApp = ApplicationMapper.INSTANCE.applicationToApplicationDto(application);
             if(previousApp.equals(applicationDto)) {
                 throw new BadRequestException("The user has already made an application with the registered information.");
             }
+            applicationDto.setId(previousApp.getId());
         });
+        return applicationDto;
     }
 }
