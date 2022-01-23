@@ -6,15 +6,15 @@
 
  **for Windows:** 
 ```sh
-cd {ProjectLocation}\n11-talenthub-bootcamp-graduation-project-bayraktar07
+cd {project-location}\n11-talenthub-bootcamp-graduation-project-bayraktar07
 ```
 
  **for Linux:**  
 ```sh
-cd {ProjectLocation}/n11-talenthub-bootcamp-graduation-project-bayraktar07
+cd {project-location}/n11-talenthub-bootcamp-graduation-project-bayraktar07
 ```
 
-**Example Location:** C:\Users\TUGRUL\IdeaProjects\n11-talenthub-bootcamp-graduation-project-bayraktar07
+> *Example Location:* C:\Users\TUGRUL\IdeaProjects\n11-talenthub-bootcamp-graduation-project-bayraktar07
 
 * To package the project; 
 
@@ -32,9 +32,7 @@ docker-compose up
 
 * Access to Swagger UI from http://localhost:8080/swagger-ui.html
 
-Documentation openapi.yml file is in,
-
-> \n11-talenthub-bootcamp-graduation-project-bayraktar07\src\main\resources\documentation
+* Documentation is [here].
 
 #### Project Requirements
 
@@ -43,3 +41,4 @@ Documentation openapi.yml file is in,
 
 [Docker]: <https://www.docker.com/products/docker-desktop>
 [Maven]: <https://maven.apache.org>
+[here]: <https://github.com/n11-TalentHub-Java-Bootcamp/n11-talenthub-bootcamp-graduation-project-bayraktar07/blob/main/src/main/resources/documentation/openapi.yaml>
