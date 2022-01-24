@@ -5,9 +5,7 @@ import com.bayraktar.graduationproject.springboot.service.ApplicationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -26,13 +24,9 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<ApplicationDto> saveNewApplication(@RequestParam String identificationNumber) {
-        ApplicationDto applicationDto = applicationService.checkUserAndApplicationExistsAndSaveApplication(identificationNumber);
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(applicationDto.getId())
-                .toUri();
-        return ResponseEntity.created(uri).body(applicationDto);
+    public ResponseEntity<ApplicationDto> saveNewApplication(String identificationNumber) {
+        ApplicationDto applicationDto = applicationService.checkUserAndApplicationExistsThenSaveApplication(identificationNumber);
+
+        return ResponseEntity.ok(applicationDto);
     }
 }

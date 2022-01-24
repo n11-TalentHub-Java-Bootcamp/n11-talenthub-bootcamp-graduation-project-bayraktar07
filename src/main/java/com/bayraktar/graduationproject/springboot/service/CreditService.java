@@ -8,6 +8,7 @@ import com.bayraktar.graduationproject.springboot.enums.CreditResult;
 import com.bayraktar.graduationproject.springboot.mapper.UserMapper;
 import com.bayraktar.graduationproject.springboot.service.entityservice.UserEntityService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import java.math.RoundingMode;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CreditService {
 
     private final UserEntityService userEntityService;
@@ -30,6 +32,7 @@ public class CreditService {
     CreditResult creditResult = calculateCreditResult(user.getCreditScore());
     BigDecimal creditLimit = calculateCreditLimit(user.getCreditScore(), user.getMonthlyIncome(), user.getDeposit());
 
+    log.info("CreditService.getCreditResultByUser -> creditResult: " + creditResult + ", creditLimit: " + creditLimit + ", userIdentificationNumber: " + userCreditDto.getIdentificationNumber());
     return CreditDto.builder()
             .creditLimit(creditLimit)
             .creditResult(creditResult)
@@ -38,16 +41,21 @@ public class CreditService {
     }
 
     private int calculateAndSaveCreditScoreByUserIdentificationNumber(User user) {
-        user.setCreditScore(user.getMonthlyIncome().divide(BigDecimal.valueOf(10),RoundingMode.DOWN).intValue());   //Assumpted Credit Score - Monthly Income divided by 10.
+        user.setCreditScore(user.getMonthlyIncome().divide(BigDecimal.valueOf(10),RoundingMode.DOWN).intValue());
         userEntityService.updateUser(user);
+        log.info("CreditService.calculateAndSaveCreditScoreByUserIdentificationNumber -> New User Credit Score assigned. Assumed Credit Score - Monthly Income divided by 10 - creditScore: " + user.getCreditScore() );
         return  user.getCreditScore();
     }
 
     private CreditResult calculateCreditResult(Integer creditScore){
+        CreditResult result;
         if(creditScore < 500) {
-            return CreditResult.DENIED;
+            result = CreditResult.DENIED;
+        }else {
+            result = CreditResult.APPROVED;
         }
-        return CreditResult.APPROVED;
+        log.info("CreditService.calculateCreditResult -> creditScore: " + creditScore + " -> result: " + result);
+        return result;
     }
 
     private BigDecimal calculateCreditLimit(Integer creditScore, BigDecimal monthlyIncome, BigDecimal deposit) {
@@ -70,6 +78,7 @@ public class CreditService {
             returnValue = deposit.divide(new BigDecimal(10), RoundingMode.DOWN).intValue() + 10000;
         }
 
+        log.info("CreditService.calculateCreditLimit -> creditScore: " + creditScore + ", monthlyIncome: " + monthlyIncome + ", deposit: " + deposit + " -> returned limit: " + returnValue);
         return new BigDecimal(returnValue);
     }
 }

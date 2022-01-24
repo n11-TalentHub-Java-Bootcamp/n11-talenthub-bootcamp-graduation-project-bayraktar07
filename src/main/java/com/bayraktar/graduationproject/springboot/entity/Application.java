@@ -4,6 +4,7 @@ import com.bayraktar.graduationproject.springboot.entity.baseentity.BaseEntity;
 import com.bayraktar.graduationproject.springboot.enums.CreditResult;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Table( name = "application")
 @Getter
 @Setter
+@ToString
 public class Application implements BaseEntity {
 
     @SequenceGenerator(name = "application_id_sequence", sequenceName = "application_id_sequence", allocationSize = 1)
@@ -20,7 +22,7 @@ public class Application implements BaseEntity {
     @Id
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user_application"))
     private User user;
 

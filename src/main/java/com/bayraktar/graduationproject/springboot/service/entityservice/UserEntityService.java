@@ -4,11 +4,13 @@ import com.bayraktar.graduationproject.springboot.dao.UserDao;
 import com.bayraktar.graduationproject.springboot.entity.User;
 import com.bayraktar.graduationproject.springboot.exception.NotFoundException;
 import com.bayraktar.graduationproject.springboot.service.entityservice.baseentityservice.BaseEntityService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserEntityService extends BaseEntityService<User, UserDao> {
 
     public UserEntityService(UserDao dao) {
