@@ -66,8 +66,8 @@ public class ApplicationService {
             if(previousApp.equals(applicationDto)) {
                 throw new BadRequestException("The user has already made an application with the registered information.");
             }
-            log.info("ApplicationService.findApplicationByUserIdThenSetApplicationId -> Different application found. Updating application with id: " + applicationDto.getId());
             applicationDto.setId(previousApp.getId());
+            log.info("ApplicationService.findApplicationByUserIdThenSetApplicationId -> Different application found. Updating application with id: " + applicationDto.getId());
         }, () -> log.info("ApplicationService.findApplicationByUserIdThenSetApplicationId -> No application was found. Creating new application"));
         return applicationDto;
     }

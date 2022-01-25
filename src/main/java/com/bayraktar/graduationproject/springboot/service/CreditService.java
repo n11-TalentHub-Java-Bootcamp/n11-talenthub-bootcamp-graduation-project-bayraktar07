@@ -26,7 +26,7 @@ public class CreditService {
         UserCreditDto userCreditDto = UserMapper.INSTANCE.userToUserCreditDto(user);
 
         if(user.getCreditScore() == null) {
-            user.setCreditScore(calculateAndSaveCreditScoreByUserIdentificationNumber(user));
+            userCreditDto.setCreditScore(calculateAndSaveCreditScoreByUserIdentificationNumber(user));
         }
 
     CreditResult creditResult = calculateCreditResult(user.getCreditScore());
@@ -41,9 +41,11 @@ public class CreditService {
     }
 
     private int calculateAndSaveCreditScoreByUserIdentificationNumber(User user) {
-        user.setCreditScore(user.getMonthlyIncome().divide(BigDecimal.valueOf(10),RoundingMode.DOWN).intValue());
+        String identificationNumber = user.getIdentificationNumber();
+        int creditScore = Integer.parseInt(identificationNumber.substring(identificationNumber.length()-5)) % 10000;
+        user.setCreditScore(creditScore);
         userEntityService.updateUser(user);
-        log.info("CreditService.calculateAndSaveCreditScoreByUserIdentificationNumber -> New User Credit Score assigned. Assumed Credit Score - Monthly Income divided by 10 - creditScore: " + user.getCreditScore() );
+        log.info("CreditService.calculateAndSaveCreditScoreByUserIdentificationNumber -> New User Credit Score assigned. Assumed Credit Score - ID`s last 4 digits - creditScore: " + user.getCreditScore() );
         return  user.getCreditScore();
     }
 

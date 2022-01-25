@@ -30,7 +30,7 @@ public class ApplicationDto implements Serializable {
 
         if (creditResult != that.creditResult) return false;
         if (!applicationDate.isEqual(that.applicationDate)) return false;
-        if (creditLimit.equals(that.creditLimit)) return false;
+        if (!creditLimit.equals(that.creditLimit)) return false;
         return userId.equals(that.userId);
     }
 

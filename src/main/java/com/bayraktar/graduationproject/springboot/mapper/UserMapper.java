@@ -19,7 +19,9 @@ public interface UserMapper {
 
     List<UserDto> userListToUserDtoList(List<User> allUsers);
 
-    User userCreditDtoToUser(UserDto userCreditDto);
+    List<User> userDtoListToUserList(List<UserDto> userDtos);
+
+    User userCreditDtoToUser(UserCreditDto userCreditDto);
 
     UserCreditDto userToUserCreditDto(User user);
 

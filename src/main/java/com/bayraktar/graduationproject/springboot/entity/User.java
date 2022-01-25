@@ -1,7 +1,9 @@
 package com.bayraktar.graduationproject.springboot.entity;
 
 import com.bayraktar.graduationproject.springboot.entity.baseentity.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
