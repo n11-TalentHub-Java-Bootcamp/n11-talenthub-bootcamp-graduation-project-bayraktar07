@@ -52,7 +52,7 @@ public class UserService {
 
     public int deleteUser(Long id) {
         int i = userEntityService.deleteUserById(id);
-        log.info("UserService.deleteUser -> deletedUserId: " + id);
+        log.info("UserService.deleteUser -> delete UserId: " + id);
         return i;
     }
 }

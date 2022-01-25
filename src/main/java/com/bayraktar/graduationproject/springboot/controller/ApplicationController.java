@@ -24,7 +24,7 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<ApplicationDto> saveNewApplication(String identificationNumber) {
+    public ResponseEntity<ApplicationDto> saveNewApplication(@RequestParam String identificationNumber) {
         ApplicationDto applicationDto = applicationService.checkUserAndApplicationExistsThenSaveApplication(identificationNumber);
 
         return ResponseEntity.ok(applicationDto);
