@@ -1,6 +1,6 @@
 ### n11 TalentHub Bootcamp Graduation Project
 
-### App initialize
+### Spring Boot App initialize
 
 * Open a terminal and go to project`s location;
 
@@ -29,6 +29,30 @@ mvn package -DskipTests=true
 ```sh
 docker-compose up
 ```
+
+### React App Initialize
+
+* Go to React Project's location;
+
+
+```sh
+cd \n11-talenthub-bootcamp-graduation-project-bayraktar07\n11-bootcamp-frontend-master
+```
+
+* Install libraries;
+
+
+```sh
+npm install
+```
+
+* Start the App;
+
+```sh
+npm start
+```
+
+* Access to React UI from http://localhost:3000
 
 * Access to Swagger UI from http://localhost:8080/swagger-ui.html
 
