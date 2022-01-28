@@ -21,13 +21,17 @@ public class User implements BaseEntity {
     @Id
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String identificationNumber;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String surname;
+    @Column(nullable = false)
     private BigDecimal monthlyIncome;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
+    @Column(nullable = false)
     private LocalDate birthDate;
     private BigDecimal deposit;
     private Integer creditScore;

@@ -1,6 +1,6 @@
 ### n11 TalentHub Bootcamp Graduation Project
 
-#### App initialize
+### App initialize
 
 * Open a terminal and go to project`s location;
 

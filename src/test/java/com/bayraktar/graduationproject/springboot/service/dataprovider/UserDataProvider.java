@@ -1,5 +1,6 @@
 package com.bayraktar.graduationproject.springboot.service.dataprovider;
 
+import com.bayraktar.graduationproject.springboot.dto.UserCreditDto;
 import com.bayraktar.graduationproject.springboot.dto.UserDto;
 import com.bayraktar.graduationproject.springboot.entity.User;
 import com.bayraktar.graduationproject.springboot.mapper.UserMapper;
@@ -16,12 +17,12 @@ public class UserDataProvider {
         return UserMapper.INSTANCE.userDtoListToUserList(users);
     }
 
-    public static List<UserDto> getAllUserList() {
+    public static List<UserCreditDto> getAllUserList() {
 
-        List<UserDto> userDtoList = new ArrayList<>();
+        List<UserCreditDto> userDtoList = new ArrayList<>();
         for(long i = 1; i < 13; i++) {
 
-            userDtoList.add(getUserDto(i));
+            userDtoList.add(UserMapper.INSTANCE.userDtoToUserCreditDto(getUserDto(i)));
         }
 
         return userDtoList;

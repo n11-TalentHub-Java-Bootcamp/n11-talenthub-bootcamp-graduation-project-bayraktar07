@@ -50,7 +50,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(errorDate, message, description);
         log.warn(ex.getMessage() + " - " + errorDate + " - " + description);
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.badRequest().body(exceptionResponse);
     }
 
     @Override

@@ -20,8 +20,8 @@ public class UserService {
 
     private final UserEntityService userEntityService;
 
-    public List<UserDto> findAllUsers() {
-        List<UserDto> userDtos = UserMapper.INSTANCE.userListToUserDtoList(userEntityService.findAllUsers());
+    public List<UserCreditDto> findAllUsers() {
+        List<UserCreditDto> userDtos = UserMapper.INSTANCE.userListToUserCreditDtoList(userEntityService.findAllUsers());
         log.info("UserService.findAllUsers");
         return userDtos;
     }

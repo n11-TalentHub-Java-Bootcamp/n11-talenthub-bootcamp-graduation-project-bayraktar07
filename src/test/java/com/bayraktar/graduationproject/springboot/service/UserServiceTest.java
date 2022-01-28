@@ -34,11 +34,11 @@ class UserServiceTest {
     @Test
     void shouldFindAllUsers() {
 
-        List<UserDto> userDtoList = UserDataProvider.getAllUserList();
-        List<User> users = UserDataProvider.userDtoListToUserList(userDtoList);
+        List<UserCreditDto> userDtoList = UserDataProvider.getAllUserList();
+        List<User> users = UserMapper.INSTANCE.userCreditDtoListToUserList(userDtoList);
         when(userEntityService.findAllUsers()).thenReturn(users);
 
-        List<UserDto> allUsers = userService.findAllUsers();
+        List<UserCreditDto> allUsers = userService.findAllUsers();
 
         assertArrayEquals(allUsers.toArray(), userDtoList.toArray());
     }

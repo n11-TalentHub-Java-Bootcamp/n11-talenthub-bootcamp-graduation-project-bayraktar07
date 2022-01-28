@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,6 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ApplicationDto implements Serializable {
     private Long id;
+    @Enumerated(EnumType.STRING)
     private final CreditResult creditResult;
     @Pattern(regexp = "^(\\d{4})-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
     private final LocalDate applicationDate;
@@ -30,7 +33,7 @@ public class ApplicationDto implements Serializable {
 
         if (creditResult != that.creditResult) return false;
         if (!applicationDate.isEqual(that.applicationDate)) return false;
-        if (!creditLimit.equals(that.creditLimit)) return false;
+        if (creditLimit.intValue() != ((ApplicationDto) o).creditLimit.intValue()) return false;
         return userId.equals(that.userId);
     }
 
